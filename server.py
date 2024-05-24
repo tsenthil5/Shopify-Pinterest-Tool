@@ -7,6 +7,17 @@ import mimetypes
 import requests
 import time
 from flask import Flask, redirect, url_for
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Access the API access key
+api_access_key = os.getenv('API_ACCESS_KEY')
+
+# Use the API access key in your code
+print(f"Your API access key is: {api_access_key}")
+
 
 app = Flask(__name__)
 
@@ -60,7 +71,7 @@ def add_images():
     filePath = "frog.jpeg"
     with open(filePath, 'rb') as f:
         image = f.read()
-    fileSize = os.path.getsize(filePath)
+    
     
     query = gql('''
     mutation stagedUploadsCreate($input: [StagedUploadInput!]!) {
